@@ -1,7 +1,6 @@
 import yaml, requests, ssl, json
 from random import randint
 
-global ENV, TENANT, TYPE
 TOKEN = 'JEJnQ4fjSWWBbU0UNXqJf'                                 # Config API Token
 HEADERS = {'Content-Type': 'application/json; charset=utf-8',
            'Authorization': 'Api-Token ' + TOKEN}               # HEADERS & Dynatrace Config API Token for json payload validation
