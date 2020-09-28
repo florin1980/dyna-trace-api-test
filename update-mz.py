@@ -1,6 +1,7 @@
 import yaml, requests, ssl, json
 from random import randint
 
+
 yaml_data = dict()                                              # GLOBAL dict to receive YAML data
 rule_items = 'host-group-prefixes'                              # CONST YAML level entry for each new Dynatrace rule
 id_mz_length = 18                                               # CONST Management Zone ID length
