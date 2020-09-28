@@ -40,7 +40,22 @@ def get_all_data_mz():
         print('SSL Error')
 
 
-# 3. Send PUT requests to Dyna Config API to update/create MZs
+# 3. Validate JSON payload prior to sending
+# ... as recommended here:
+# https://www.dynatrace.com/support/help/dynatrace-api/configuration-api/management-zones-api/put-mz/
+def validate_json_payload(id_mz, json_data):
+    try:
+        # attempt JSON request put
+        r = requests.post(
+            ENV + '/api/config/v1/' + TYPE + '/' + str(id_mz) + '/validator',
+            data=json_data, headers=HEADERS)
+        return r.status_code
+
+    except ssl.SSLError:
+        print('SSL Error')
+
+
+# 4. Send PUT requests to Dyna Config API to update/create MZs
 def update_data_mz():
     for name_mz, doc in yaml_data['teams'].items():
 
@@ -60,14 +75,19 @@ def update_data_mz():
 
         # UPDATE/CREATE existing/new Management Zone
         try:
-            # attempt JSON request put
-            r = requests.put(
-                ENV + '/api/config/v1/' + TYPE + '/' + str(id_mz),
-                data=json_data, headers=HEADERS)
-            print('%s UPDATE/CREATE MZ with ID: %d' % (id_mz, r.status_code))
+            # validate JSON request put
+            v = validate_json_payload(id_mz, json_data)
+            if v == 204:
+                # if valid attempt JSON request put
+                r = requests.put(
+                    ENV + '/api/config/v1/' + TYPE + '/' + str(id_mz),
+                    data=json_data, headers=HEADERS)
+                print('%s UPDATE/CREATE MZ with ID: %d' % (id_mz, r.status_code))
 
-            # add this ID to exception list
-            dyna_mz_ids.append(id_mz)
+                # add this ID to exception list
+                dyna_mz_ids.append(id_mz)
+            else:
+                print('JSON payload Validation failed with status: ' + str(v))
 
         except ssl.SSLError:
             print('SSL Error')
