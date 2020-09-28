@@ -10,18 +10,18 @@ class DynatraceAPI:
 
     def __init__(self):
         # 1. open yaml file and get data
-        self.yaml_data = {}
+        self.yaml_data = {}                                                             # Dict for YAML based data
         with open(r'desc-mz.yml') as file:
             self.yaml_data.update(yaml.load(file, Loader=yaml.FullLoader))
 
         self.env_id = str(self.yaml_data['enviromment_id'])                             # Base URL for JSON payload
         self.tenant = str(self.yaml_data['tenant_id'])                                  # Florin Sandescu Trial Tenant ID
-        self.type = str(self.yaml_data['type'])                                         # Florin Sandescu Trial Tenant ID
+        self.type = str(self.yaml_data['type'])                                         # Florin Sandescu Type:MZ
         self.token = str(self.yaml_data['api_token'])                                   # Config API Token
         self.headers = {'Content-Type': 'application/json; charset=utf-8',
-                        'Authorization': 'Api-Token ' + self.token}                     # HEADERS & Dynatrace Config API Token for json payload validation
-        self.dyna_mz_data = []
-        self.dyna_mz_ids = []
+                        'Authorization': 'Api-Token ' + self.token}                     # headers & Dynatrace Config API Token for json payload validation
+        self.dyna_mz_data = []                                                          # list of Dyna Current IDs/Names
+        self.dyna_mz_ids = []                                                           # List of current reserved IDs (excepted from randomizing)
         self.logger = logging.getLogger(__name__)
 
         # make it self.logger.debug to the console.
@@ -103,14 +103,12 @@ class DynatraceAPI:
         s = self.new_random_id_mz() if len(s) == 0 else s
         return str(s)
 
-    # generate random number of n digits as new IDs
+    # generate random number of ID_MZ_LENGTH digits as new IDs
     # excluding entries in dynatrace exception list
     def new_random_id_mz(self):
-        # set random number ranges as defined as CONST
-        # and generate random number
-
         range_start = 10 ** (ID_MZ_LENGTH - 1)
         range_end = (10 ** ID_MZ_LENGTH) - 1
+        # and generate random number
         i = randint(range_start, range_end)
 
         # return random number NOT IN exception list IDs
