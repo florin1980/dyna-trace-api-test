@@ -29,7 +29,7 @@ class DynatraceAPI:
         self.logger.addHandler(console)
 
     # 2. get current dynatrace list of IDs/Names
-    def get_current_data_mz(self):
+    def get_current_data_mz(self) -> None:
         try:
             # attempt to fetch all existing current Dyna dictionary (IDs/Names)
             r = requests.get(url=f'{self.env_id}{CFG_ENDPOINT}{self.type}', headers=self.headers)
@@ -105,7 +105,7 @@ class DynatraceAPI:
 
     # generate random number of ID_MZ_LENGTH digits as new IDs
     # excluding entries in dynatrace exception list
-    def new_random_id_mz(self):
+    def new_random_id_mz(self) -> int:
         range_start = 10 ** (ID_MZ_LENGTH - 1)
         range_end = (10 ** ID_MZ_LENGTH) - 1
         # and generate random number
