@@ -1,15 +1,15 @@
 # dyna-api-test
 DynaTrace Config API test
 
-This is a Python based solution for automatically updating Dynatrace [Management Zones](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/ "Management Zones").
+### This is a Python based solution for automatically updating Dynatrace [Management Zones](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/ "Management Zones").
 ------------------------------------------------------------------------------------------------------------
 
-###Prerequisites:
+### Prerequisites:
 * Dynatrace trial account (provides for a testing tenant testing environemnt)
 * Create ReadWrite Config API & Enable it using secure TOKEN
-
 ------------------------------------------------------------------------------------------------------------
-###This repository contains the following:
+
+### This repository contains the following:
 1. a YAML file which holds descriptions for Management Zones Names & Rules 
 2. a basic Python script to:
    * Accept as Input and read above YAML file
