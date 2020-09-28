@@ -25,7 +25,8 @@ def open_yaml():
 
 
 # 2. get current dynatrace list of IDs/Names
-def get_all_data_mz():
+def get_current_data_mz():
+
     try:
         # attempt to fetch all existing current Dyna dictionary (IDs/Names)
         r = requests.get(ENV + '/api/config/v1/' + TYPE, headers=HEADERS)
@@ -120,7 +121,7 @@ def new_random_id_mz():
 # Main sequence execution
 def main():
     open_yaml()
-    get_all_data_mz()
+    get_current_data_mz()
     update_data_mz()
 
 
