@@ -1,10 +1,6 @@
 import yaml, requests, ssl, json
 from random import randint
 
-TOKEN = 'JEJnQ4fjSWWBbU0UNXqJf'                                 # Config API Token
-HEADERS = {'Content-Type': 'application/json; charset=utf-8',
-           'Authorization': 'Api-Token ' + TOKEN}               # HEADERS & Dynatrace Config API Token for json payload validation
-
 yaml_data = dict()                                              # GLOBAL dict to receive YAML data
 rule_items = 'host-group-prefixes'                              # CONST YAML level entry for each new Dynatrace rule
 id_mz_length = 18                                               # CONST Management Zone ID length
@@ -14,13 +10,16 @@ dyna_mz_ids = []                                                # GLOBAL list to
 
 # 1. open yaml file and get data
 def open_yaml():
-    global ENV, TENANT, TYPE
+    global ENV, TENANT, TYPE, TOKEN, HEADERS
     with open(r'desc-mz.yml') as file:
         yaml_data.update(yaml.load(file, Loader=yaml.FullLoader))
 
     ENV = str(yaml_data['enviromment_id'])                      # Base URL for JSON payload
     TENANT = str(yaml_data['tenant_id'])                        # Florin Sandescu Trial Tenant ID
     TYPE = str(yaml_data['type'])                               # Florin Sandescu Trial Tenant ID
+    TOKEN = str(yaml_data['api_token'])                         # Config API Token
+    HEADERS = {'Content-Type': 'application/json; charset=utf-8',
+               'Authorization': 'Api-Token ' + TOKEN}               # HEADERS & Dynatrace Config API Token for json payload validation
 
 
 # 2. get current dynatrace list of IDs/Names
