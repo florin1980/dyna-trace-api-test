@@ -11,7 +11,7 @@ class DynatraceAPI:
     def __init__(self):
         # 1. open yaml file and get data
         self.yaml_data = {}  # Dict for YAML based data
-        with open(r'desc-mz.yml') as file:
+        with open('desc-mz.yml', 'r') as file:
             self.yaml_data.update(yaml.load(file, Loader=yaml.FullLoader))
 
         self.env_id = str(self.yaml_data['enviromment_id'])  # Base URL for JSON payload
