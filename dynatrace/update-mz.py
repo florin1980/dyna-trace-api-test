@@ -1,9 +1,6 @@
 import yaml, requests, ssl, json, logging
 from random import randint
-
-CFG_ENDPOINT = '/api/config/v1/'
-RULE_ITEMS = 'host-group-prefixes'
-ID_MZ_LENGTH = 18
+from dynatrace import CFG_ENDPOINT, RULE_ITEMS, ID_MZ_LENGTH
 
 
 class DynatraceAPI:
@@ -11,7 +8,7 @@ class DynatraceAPI:
     def __init__(self):
         # 1. open yaml file and get data
         self.yaml_data = {}  # Dict for YAML based data
-        with open('desc-mz.yml', 'r') as file:
+        with open('../desc-mz.yml', 'r') as file:
             self.yaml_data.update(yaml.load(file, Loader=yaml.FullLoader))
 
         self.env_id = str(self.yaml_data['enviromment_id'])  # Base URL for JSON payload
