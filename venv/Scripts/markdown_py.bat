@@ -1,1 +1,0 @@
-@"C:\Users\flsandescu\IdeaProjects\dyna-api-test\venv\Scripts\python.exe" "C:\Users\flsandescu\IdeaProjects\dyna-api-test\venv\Scripts\markdown_py" %*
