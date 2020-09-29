@@ -10,18 +10,18 @@ class DynatraceAPI:
 
     def __init__(self):
         # 1. open yaml file and get data
-        self.yaml_data = {}                                                             # Dict for YAML based data
+        self.yaml_data = {}  # Dict for YAML based data
         with open(r'desc-mz.yml') as file:
             self.yaml_data.update(yaml.load(file, Loader=yaml.FullLoader))
 
-        self.env_id = str(self.yaml_data['enviromment_id'])                             # Base URL for JSON payload
-        self.tenant = str(self.yaml_data['tenant_id'])                                  # Florin Sandescu Trial Tenant ID
-        self.type = str(self.yaml_data['type'])                                         # Florin Sandescu Type:MZ
-        self.token = str(self.yaml_data['api_token'])                                   # Config API Token
+        self.env_id = str(self.yaml_data['enviromment_id'])  # Base URL for JSON payload
+        self.tenant = str(self.yaml_data['tenant_id'])  # Florin Sandescu Trial Tenant ID
+        self.type = str(self.yaml_data['type'])  # Florin Sandescu Type:MZ
+        self.token = str(self.yaml_data['api_token'])  # Config API Token
         self.headers = {'Content-Type': 'application/json; charset=utf-8',
-                        'Authorization': 'Api-Token ' + self.token}                     # headers & Dynatrace Config API Token for json payload validation
-        self.dyna_mz_data = []                                                          # list of Dyna Current IDs/Names
-        self.dyna_mz_ids = []                                                           # List of current reserved IDs (excepted from randomizing)
+                        'Authorization': 'Api-Token ' + self.token}  # headers & Dynatrace Config API Token for json payload validation
+        self.dyna_mz_data = []  # list of Dyna Current IDs/Names
+        self.dyna_mz_ids = []  # List of current reserved IDs (excepted from randomizing)
 
         # logging
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s-%(process)d-%(levelname)s-%(message)s')
@@ -122,7 +122,6 @@ class DynatraceAPI:
 
         except Exception as ex:
             logging.exception("Exception occurred")
-
 
 
 # Main sequence execution
