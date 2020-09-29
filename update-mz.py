@@ -24,10 +24,13 @@ class DynatraceAPI:
         self.dyna_mz_ids = []  # List of current reserved IDs (excepted from randomizing)
 
         # logging
-        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s-%(process)d-%(levelname)s-%(message)s')
+        logging.basicConfig(level=logging.DEBUG)
         self.logger = logging.getLogger(__name__)
         # make self.logger.debug to the console.
         console = logging.StreamHandler()
+        console.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)s-%(process)d-%(levelname)s-%(message)s')
+        console.setFormatter(formatter)
         self.logger.addHandler(console)
 
     # 2. get current dynatrace list of IDs/Names
@@ -43,7 +46,7 @@ class DynatraceAPI:
                 self.dyna_mz_ids.append(entry['id'])
 
         except ssl.SSLError as e:
-            logging.error('SSL Error', exc_info=True)
+            self.logger.error('SSL Error', exc_info=True)
 
     # 3. Validate JSON payload prior to sending
     # ... as recommended here:
@@ -56,7 +59,7 @@ class DynatraceAPI:
             return r.status_code
 
         except ssl.SSLError as e:
-            logging.error('SSL Error', exc_info=True)
+            self.logger.error('SSL Error', exc_info=True)
 
     # 4. Send PUT requests to Dyna Config API to update/create MZs
     def update_data_mz(self) -> None:
@@ -94,7 +97,7 @@ class DynatraceAPI:
                     self.logger.debug('JSON payload Validation failed with status: ' + str(v))
 
             except ssl.SSLError as e:
-                logging.error('SSL Error', exc_info=True)
+                self.logger.error('SSL Error', exc_info=True)
 
     # generate new ID for json request OR get existing ID
     def get_dyna_mz_id(self, name_mz: str) -> str:
@@ -106,7 +109,7 @@ class DynatraceAPI:
             s = self.new_random_id_mz() if len(s) == 0 else s
             return str(s)
         except Exception as ex:
-            logging.exception("Exception occurred")
+            self.logger.exception("Exception occurred")
 
     # generate random number of ID_MZ_LENGTH digits as new IDs
     # excluding entries in dynatrace exception list
@@ -121,7 +124,7 @@ class DynatraceAPI:
             return self.new_random_id_mz() if i in self.dyna_mz_ids else i
 
         except Exception as ex:
-            logging.exception("Exception occurred")
+            self.logger.exception("Exception occurred")
 
 
 # Main sequence execution
