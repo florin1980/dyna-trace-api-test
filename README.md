@@ -16,4 +16,4 @@ DynaTrace Config API test
    * Accept as Input and read above YAML file
    * Get Current Lists of Management Zones IDs/Names
    * Compare Current List against YAML included definitions
-   * Modifies Management Zones structure by updating existing management Zones or creating new ones by interacting with Dynatrace [Config API](https://www.dynatrace.com/support/help/dynatrace-api/configuration-api/) based on a [ReadWrite API TOKEN](https://www.dynatrace.com/support/help/dynatrace-api/environment-api/tokens/post-new-token/ "ReadWrite API TOKEN)
+   * Modifies Management Zones structure by updating existing management Zones or creating new ones by interacting with Dynatrace [Config API](https://www.dynatrace.com/support/help/dynatrace-api/configuration-api/) based on a [ReadWrite API TOKEN](https://www.dynatrace.com/support/help/dynatrace-api/environment-api/tokens/post-new-token/ "ReadWrite API TOKEN")
