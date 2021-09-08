@@ -1,7 +1,7 @@
 # dyna-api-test
 DynaTrace Config API test
 
-### This is a Python based solution for automatically updating Dynatrace [Management Zones](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/ "Management Zones").
+### This is a Python based solution for automatically update Dynatrace [Management Zones](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/ "Management Zones").
 ------------------------------------------------------------------------------------------------------------
 
 ### Prerequisites:

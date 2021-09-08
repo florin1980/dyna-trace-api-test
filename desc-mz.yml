@@ -1,7 +1,7 @@
 enviromment_id: https://njd61765.live.dynatrace.com
 tenant_id: njd61765
 type: managementZones
-api_token: JEJnQ4fjSWWBbU0UNXqJf
+api_token: <apiToken>
 teams:
   global-pcf-a:
     cost-center: ct-4291
